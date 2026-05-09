@@ -4,32 +4,22 @@ import android.app.Service
 import android.content.Intent
 import android.graphics.PixelFormat
 import android.os.IBinder
-import android.view.Gravity
-import android.view.WindowManager
-import android.widget.TextView
-import android.graphics.Color
+import android.view.*
+import android.widget.Button
+import android.widget.Toast
 
 class OverlayService : Service() {
-
     private lateinit var windowManager: WindowManager
-    private lateinit var floatingView: TextView
+    private lateinit var floatingView: View
 
     override fun onBind(intent: Intent?): IBinder? = null
 
     override fun onCreate() {
         super.onCreate()
-        
         windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
-        
-        // Create the actual text box that will float
-        floatingView = TextView(this).apply {
-            text = "AR8 HACK: ACTIVE"
-            setBackgroundColor(Color.parseColor("#4CAF50")) // Green
-            setTextColor(Color.WHITE)
-            setPadding(20, 20, 20, 20)
-        }
+        val inflater = getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        floatingView = inflater.inflate(R.layout.overlay_menu, null)
 
-        // Tell Android HOW to show this window
         val params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.WRAP_CONTENT,
             WindowManager.LayoutParams.WRAP_CONTENT,
@@ -40,6 +30,33 @@ class OverlayService : Service() {
             gravity = Gravity.TOP or Gravity.START
             x = 100
             y = 100
+        }
+
+        // Make it Draggable
+        floatingView.setOnTouchListener(object : View.OnTouchListener {
+            private var initialX = 0; private var initialY = 0
+            private var initialTouchX = 0f; private var initialTouchY = 0f
+            override fun onTouch(v: View, event: MotionEvent): Boolean {
+                when (event.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        initialX = params.x; initialY = params.y
+                        initialTouchX = event.rawX; initialTouchY = event.rawY
+                        return true
+                    }
+                    MotionEvent.ACTION_MOVE -> {
+                        params.x = initialX + (event.rawX - initialTouchX).toInt()
+                        params.y = initialY + (event.rawY - initialTouchY).toInt()
+                        windowManager.updateViewLayout(floatingView, params)
+                        return true
+                    }
+                }
+                return false
+            }
+        })
+
+        floatingView.findViewById<Button>(R.id.btnClose).setOnClickListener { stopSelf() }
+        floatingView.findViewById<Button>(R.id.btnLines).setOnClickListener {
+            Toast.makeText(this, "Line Engine Active (Visual Only)", Toast.LENGTH_SHORT).show()
         }
 
         windowManager.addView(floatingView, params)

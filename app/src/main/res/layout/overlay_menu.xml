@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#CC000000"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:elevation="10dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AR8 POOL MOD"
+        android:textColor="#00FF00"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:paddingBottom="5dp"/>
+    <Button
+        android:id="@+id/btnLines"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="EXTEND LINES"
+        android:textSize="12sp" />
+    <Button
+        android:id="@+id/btnClose"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="CLOSE HACK"
+        android:backgroundTint="#FF4444"
+        android:textSize="12sp" />
+</LinearLayout>
