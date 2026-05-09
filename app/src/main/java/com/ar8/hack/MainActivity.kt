@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.provider.Settings
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,8 +27,8 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && data != null) {
-            val intent = Intent(this, OverlayService::class.java).apply { putExtra("DATA", data) }
-            startService(intent); moveTaskToBack(true)
+            startService(Intent(this, OverlayService::class.java).apply { putExtra("DATA", data) })
+            moveTaskToBack(true)
         }
     }
 }

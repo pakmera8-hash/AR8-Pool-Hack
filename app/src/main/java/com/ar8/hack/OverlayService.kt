@@ -20,8 +20,9 @@ class OverlayService : Service() {
             }
             true
         }
-        view.findViewById<Button>(R.id.btnLines).setOnClickListener { Toast.makeText(this, "Auto-Detecting Balls...", Toast.LENGTH_SHORT).show() }
+        view.findViewById<Button>(R.id.btnDetect).setOnClickListener { Toast.makeText(this, "Scanning Balls... Autoplay Active", Toast.LENGTH_SHORT).show() }
         view.findViewById<Button>(R.id.btnClose).setOnClickListener { stopSelf() }
         wm.addView(view, params)
     }
+    override fun onDestroy() { super.onDestroy() }
 }
