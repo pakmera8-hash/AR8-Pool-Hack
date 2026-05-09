@@ -1,8 +1,7 @@
 plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
+    id 'com.android.application' version '8.2.0'
+    id 'org.jetbrains.kotlin.android' version '1.9.0'
 }
-
 android {
     namespace 'com.ar8.hack'
     compileSdk 34
