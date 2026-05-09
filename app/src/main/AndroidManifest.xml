@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ar8.hack">
+    >
 
     <!-- These permissions allow AR8 to draw over the game and use the internet -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
