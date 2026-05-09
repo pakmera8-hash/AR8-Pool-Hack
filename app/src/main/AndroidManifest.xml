@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- These permissions allow AR8 to draw over the game and use the internet -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <!-- Required for Android 14+ -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
 
     <application
-        android:label="AR8 Hack"
-        android:hardwareAccelerated="true">
-
-        <!-- Your Login/Promo Code Screen -->
+        android:allowBackup="true"
+        android:icon="@android:mipmap/sym_def_app_icon"
+        android:roundIcon="@android:mipmap/sym_def_app_icon"
+        android:label="AR8 Pool Hack"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -21,8 +23,11 @@
             </intent-filter>
         </activity>
 
-        <!-- The hidden service that calculates the 9-ball shots -->
-        <service android:name=".OverlayService" android:enabled="true" android:exported="false" />
+        <service 
+            android:name=".OverlayService" 
+            android:enabled="true" 
+            android:exported="false"
+            android:foregroundServiceType="specialUse" />
 
     </application>
 </manifest>
