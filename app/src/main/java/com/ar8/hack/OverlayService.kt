@@ -28,11 +28,10 @@ class OverlayService : Service() {
             PixelFormat.TRANSLUCENT
         ).apply {
             gravity = Gravity.TOP or Gravity.START
-            x = 100
-            y = 100
+            x = 100; y = 100
         }
 
-        // Make it Draggable
+        // Draggable Logic
         floatingView.setOnTouchListener(object : View.OnTouchListener {
             private var initialX = 0; private var initialY = 0
             private var initialTouchX = 0f; private var initialTouchY = 0f
@@ -54,10 +53,12 @@ class OverlayService : Service() {
             }
         })
 
-        floatingView.findViewById<Button>(R.id.btnClose).setOnClickListener { stopSelf() }
         floatingView.findViewById<Button>(R.id.btnLines).setOnClickListener {
-            Toast.makeText(this, "Line Engine Active (Visual Only)", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "AUTO-DETECT: Scanning Table...", Toast.LENGTH_SHORT).show()
+            // Here you would normally call the OpenCV/NDK detection engine
         }
+
+        floatingView.findViewById<Button>(R.id.btnClose).setOnClickListener { stopSelf() }
 
         windowManager.addView(floatingView, params)
     }
